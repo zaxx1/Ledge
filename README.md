@@ -9,6 +9,7 @@
 - **Auto Create Accounts**
 - **Auto Referrall**
 - **Support Proxy usage**
+- **Auto Claim Points every hour**
 
 ## Prerequisites
 
@@ -32,16 +33,15 @@
     ```sh
     nano proxy.txt
     ```
+4. Auto Referral / create new wallets
+    ```sh
+    npm run autoref
+    ```
 4. Run the script:
     ```sh
     npm run start
     ```
 
-## Additional feature 
-- ### Auto Referral 
-    ```sh
-    npm run autoref
-    ```
 
 ## All wallets information saved at `wallets.json`
 
