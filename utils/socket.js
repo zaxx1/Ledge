@@ -34,11 +34,10 @@ class LayerEdgeConnection {
                 });
                 return response;
             } catch (error) {
-                if (error.response.status === 404) {
+                if (error?.response?.status === 404 || error?.status === 404) {
                     log.error(chalk.red(`Layer Edge connection failed wallet not registered yet...`));
                     return 404;
-                }
-                if (i === retries - 1) {
+                } else if (i === retries - 1) {
                     log.error(`Max retries reached - Request failed:`, error.message);
                     if (this.proxy) {
                         log.error(`Failed proxy: ${this.proxy}`, error.message);
