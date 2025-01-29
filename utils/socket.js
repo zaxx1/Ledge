@@ -8,6 +8,10 @@ class LayerEdgeConnection {
     constructor(proxy = null, privateKey = null, refCode = "O8Ijyqih") {
         this.refCode = refCode;
         this.proxy = proxy;
+        this.headers = {
+            Accept: "application/json, text/plain, */*",
+            Origin: "https://dashboard.layeredge.io",
+        }
 
         this.axiosConfig = {
             ...(this.proxy && { httpsAgent: newAgent(this.proxy) }),
@@ -26,9 +30,15 @@ class LayerEdgeConnection {
     async makeRequest(method, url, config = {}, retries = 30) {
         for (let i = 0; i < retries; i++) {
             try {
+                const headers = { ...this.headers };
+                if (method.toUpperCase() === 'POST') {
+                    headers['Content-Type'] = 'application/json';
+                }
+
                 const response = await axios({
                     method,
                     url,
+                    headers,
                     ...this.axiosConfig,
                     ...config,
                 });
